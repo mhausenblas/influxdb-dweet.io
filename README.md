@@ -1,14 +1,15 @@
 # InfluxDB - dweet.io data ingest
 
 This is an experiment to ingest data from [dweet.io](http://dweet.io) into 
-[InfluxDB](http://influxdb.com/download/).
+[InfluxDB](http://influxdb.com/docs/v0.8/introduction/overview.html).
 
 ## Dependencies
 
-I assume that you've InfluxDB installed and also its
+I assume that you've [installed](http://influxdb.com/download/) InfluxDB,
+as well as its
 [Python client lib](http://influxdb.com/docs/v0.8/client_libraries/python.html).
-Further, a database in InfluxDB with the name `dweet` must exist along with
-the following user (with Admin role enabled):
+Further, you'll need to create a database in InfluxDB with the name 
+`dweet` along with the following user (with Admin role enabled):
 
     user name: dweet
     password:  dweet
