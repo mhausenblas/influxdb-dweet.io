@@ -1,4 +1,12 @@
-influxdb-dweet.io
-=================
+# InfluxDB - dweet.io data ingest
 
-Experiment to ingest data from dweet.io into InfluxDB
+This is an experiment to ingest data from [dweet.io](http://dweet.io) into 
+[InfluxDB](http://influxdb.com/download/).
+
+## Usage
+
+TBD.
+
+## License
+
+See the [LICENSE](LICENSE) file.
