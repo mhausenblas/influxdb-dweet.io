@@ -16,12 +16,22 @@ the following user (with Admin role enabled):
 Also, make sure the time series `dweet` is empty, by executing the following in
 the Web UI:
 
-    delete from dweet or drop dweet
+    delete from dweet
+or
+
+    drop dweet
 
 ## Usage
 
+Simply run the script, providing it the FQHN where your InfluxDB runs, like this:
 
-TBD.
+    python dwingest.py influxdb
+    
+You should then see the something like this in the 
+[InfluxDB UI](http://influxdb:8083/) when executing 
+`select  aiHotWaterTemp_degreesF from dweet`:
+
+![dweet.io time series example](img/influxdb-ui-dweet-ts.png "dweet.io time series example")
 
 ## License
 
