@@ -24,15 +24,43 @@ or
 
 ## Usage
 
-Simply run the script, providing it the FQHN where your InfluxDB runs, like this:
+Simply run the script, providing it:
 
-    python dwingest.py influxdb
+* the FQHN where your InfluxDB runs
+* the thing itself, [discover](https://dweet.io/see) it first
+* the key that you want to track (an item of the `content` object)
+
+For example, call the script like this:
+
+    python dwingest.py influxdb AvocadoGrove aiHotWaterTemp_degreesF
     
-You should then see the something like this in the 
-[InfluxDB UI](http://influxdb:8083/) when executing 
-`select  aiHotWaterTemp_degreesF from dweet`:
+which pulls data from the thing [AvocadoGrove](https://dweet.io:443/get/latest/dweet/for/AvocadoGrove)
+using the key `aiHotWaterTemp_degreesF`:
+
+      {
+          "by": "getting",
+          "the": "dweets",
+          "this": "succeeded",
+          "with": [
+              {
+                  "content": {
+                      "aiHotWaterTemp_degreesF": 98.463,
+                      "aiOutsideTemp_degreesF": 95.935,
+                      ...
+                  },
+                  "created": "2014-09-06T16:56:32.305Z",
+                  "thing": "AvocadoGrove"
+              }
+          ]
+      }
+
+You should then see something like this in the [InfluxDB UI](http://influxdb:8083/): 
 
 ![dweet.io time series example](img/influxdb-ui-dweet-ts.png "dweet.io time series example")
+
+when executing: 
+
+    select aiHotWaterTemp_degreesF from dweet
 
 ## License
 

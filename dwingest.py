@@ -4,7 +4,7 @@ Allows to ingest data from dweet.io into InfluxDB.
 
 Usage: 
 
-  `python dwingest.py`  ... run with defaults
+  `python dwingest.py influxdb AvocadoGrove aiHotWaterTemp_degreesF`  ... run using host `influxdb` to store TS
 
 @author: Michael Hausenblas, http://mhausenblas.info/#i
 @since: 2014-09-06
@@ -22,7 +22,7 @@ from influxdb import client as influxdb
 # defaults
 #
 
-DEBUG = True
+DEBUG = False
 
 if DEBUG:
   FORMAT = '%(asctime)-0s %(levelname)s %(message)s [at line %(lineno)d]'
@@ -59,22 +59,31 @@ def push_datapoint(ifx_client, the_thing, the_key):
             "points": [
                 [the_thing, dvalue]
             ]
-        }]
-    logging.debug("Ingesting {0}".format(datapoint))
+    }]
+    logging.info("Ingesting {0}".format(datapoint))
     ifx_client.write_points(datapoint)
 
+def usage():
+  print("Usage:")
+  print(" python dwingest.py $INFLUXDB_HOSTNAME $THING $KEY")
+  print("\nExample:")
+  print(" python dwingest.py influxdb AvocadoGrove aiHotWaterTemp_degreesF")
 
 ################################################################################
 # main script
 #
 if __name__ == '__main__':
-  host = HOST
   try:
       if sys.argv[1]:
         host = sys.argv[1]
+      if sys.argv[2]:
+        thing = sys.argv[2]
+      if sys.argv[3]:
+        key = sys.argv[3]
+      
       logging.info("Using InfluxDB host at %s:%s" %(host, PORT))
       ifx_client = influxdb.InfluxDBClient(host, PORT, USER_NAME, USER_PWD, DATABASE)
-      push_datapoint(ifx_client, "AvocadoGrove", "aiHotWaterTemp_degreesF")
+      push_datapoint(ifx_client, thing, key)
   except Exception, e:
-    logging.error(e)
+    usage()
     sys.exit(2)
