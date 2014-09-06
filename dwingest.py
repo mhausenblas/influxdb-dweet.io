@@ -14,10 +14,6 @@ Usage:
 import sys
 import os
 import logging
-import string
-import datetime
-import time
-from os import curdir, sep
 from influxdb import client as influxdb
 
 ################################################################################
@@ -35,8 +31,8 @@ else:
 
 HOST =      "localhost"
 PORT =      8086
-USER_NAME = "dw"
-USER_PWD =  "dw"
+USER_NAME = "dweet"
+USER_PWD =  "dweet"
 DATABASE =  "dweet"
 
 
@@ -60,9 +56,16 @@ def push_datapoint(ifx_client):
 # main script
 #
 if __name__ == '__main__':
+  host = HOST
+  port = PORT
+  
+  
   try:
-      # if sys.argv[1]:
-      ifx_client = influxdb.InfluxDBClient(HOST, PORT, USER_NAME, USER_PWD, DATABASE)
+      if sys.argv[1]:
+        host = sys.argv[1]
+      if sys.argv[2]:
+        port = sys.argv[2]
+      ifx_client = influxdb.InfluxDBClient(host, port, USER_NAME, USER_PWD, DATABASE)
       push_datapoint(ifx_client)
   except Exception, e:
     logging.error(e)
