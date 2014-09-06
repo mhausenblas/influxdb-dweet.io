@@ -13,6 +13,11 @@ the following user (with Admin role enabled):
     user name: dweet
     password:  dweet
 
+Also, make sure the time series `dweet` is empty, by executing the following in
+the Web UI:
+
+    delete from dweet or drop dweet
+
 ## Usage
 
 
